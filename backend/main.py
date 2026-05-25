@@ -10,14 +10,10 @@ from agent.agent_core import run_agent
 from database.db import engine, SessionLocal
 from database.models import Base, AgentRun
 
-# Create DB tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Autonomous AI Agent")
 
-# -----------------------
-# CORS
-# -----------------------
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -26,9 +22,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# -----------------------
-# Serve Frontend
-# -----------------------
 app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
 
@@ -42,9 +35,7 @@ def serve_history():
     return FileResponse("frontend/history.html")
 
 
-# -----------------------
-# DB Dependency
-# -----------------------
+
 def get_db():
     db = SessionLocal()
     try:
@@ -52,17 +43,10 @@ def get_db():
     finally:
         db.close()
 
-
-# -----------------------
-# Request Model
-# -----------------------
 class TaskRequest(BaseModel):
     task: str
 
 
-# -----------------------
-# Run Agent
-# -----------------------
 @app.post("/run-agent")
 def run_agent_api(request: TaskRequest, db: Session = Depends(get_db)):
 
@@ -92,9 +76,7 @@ def run_agent_api(request: TaskRequest, db: Session = Depends(get_db)):
     }
 
 
-# -----------------------
-# Get History
-# -----------------------
+
 @app.get("/agent-runs")
 def get_all_runs(db: Session = Depends(get_db)):
     runs = db.query(AgentRun).all()
