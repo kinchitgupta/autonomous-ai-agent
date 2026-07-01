@@ -135,7 +135,7 @@ async function runAgent() {
     const typingBubble = addBubble("Agent thinking...", "agent typing");
 
     try {
-        const res = await fetch("http://127.0.0.1:8000/run-agent", {
+        const res = await fetch("http://127.0.0.1:9001/run-agent", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({task})

@@ -1,15 +1,13 @@
 import requests
 import json
 import re
-from agent.tools import TOOLS
+from ai_agent.tools import TOOLS
 
 OLLAMA_URL = "http://127.0.0.1:11434/api/generate"
 MODEL = "llama3.2:3b"
 
 
-# -------------------------
-# BASIC CONVERSATION HANDLER
-# -------------------------
+
 def basic_conversation(task: str):
     msg = task.lower().strip()
 
@@ -163,8 +161,7 @@ def ask_llm(prompt: str) -> str:
 # AGENT LOOP
 # -------------------------
 def run_agent(task: str):
-
-
+    print("DEBUG: Agent running latest code")
     convo_reply = basic_conversation(task)
     if convo_reply:
         return {"plan": ["Conversation"], "observations": [], "result": convo_reply}

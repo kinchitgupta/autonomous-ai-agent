@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from datetime import datetime
 
-from agent.agent_core import run_agent
+from ai_agent.agent_core import run_agent
 from database.db import engine, SessionLocal
 from database.models import Base, AgentRun
 

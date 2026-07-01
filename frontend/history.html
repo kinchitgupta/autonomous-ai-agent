@@ -114,7 +114,7 @@ function formatTime(ts) {
 }
 
 async function loadHistory() {
-    const res = await fetch("http://127.0.0.1:8000/agent-runs");
+    const res = await fetch("http://127.0.0.1:9001/agent-runs");
     const data = await res.json();
 
     const box = document.getElementById("history");
